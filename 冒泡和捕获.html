@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		color: red;
+	}
+		#one{
+			width: 200px;
+			height: 200px;
+			background: orange;
+			margin: 100px auto;
+		}
+		#two{
+			width: 100px;
+			height: 100px;
+			background: skyblue;
+		}
+		#three{
+			width: 50px;
+			height: 50px;
+			background: yellow;
+		}
+		#four{
+			width: 30px;
+			height: 30px;
+			background: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="one">1
+		<div id="two">2
+			<div id="three">3
+				<div id="four">4</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+//冒泡就是从下往上，像鱼吐泡，泡泡是从下往上升的，也就是DOM元素被触法事件时(此时的dom元素为目标元素)
+//目标元素事件执行后，它的祖先元素所绑定的事件会向上顺序执行。
+//addEventListener函数的第三个参数设置为false说明不为捕获事件，即为冒泡事件。
+	var one = document.getElementById("one");
+	var two = document.getElementById("two");
+	var three = document.getElementById("three");
+	var four = document.getElementById("four");
+	// one.onclick = function(){
+	// 	alert("one");
+	// }
+	// two.onclick = function(){
+	// 	alert("two");
+	// 	// event.stopPropagation();
+	// }
+	// three.onclick = function(){
+	// 	alert("hree");
+	// }
+	// four.onclick = function(){
+	// 	alert("four");
+	// }
+	one.addEventListener("click",function(){
+		alert("one");
+	})
+	two.addEventListener("click",function(){
+		alert("two");
+	})
+	three.addEventListener("click",function(){
+		alert("three");
+	})
+	four.addEventListener("click",function(){
+		alert("four");
+	})
+
+//addEventListenner的使用，不写第三个参数默认是false;
+
+	//捕获则相反。当触发目标元素时，会从目标元素的最顶层的祖先元素事件往下执行到目标元素为止。
+	// one.addEventListener("click",function(){
+	// 	alert("one");
+	// },true)
+	// two.addEventListener("click",function(){
+	// 	alert("two");
+	// },true)
+	// three.addEventListener("click",function(){
+	// 	alert("three");
+	// },true)
+	// four.addEventListener("click",function(){
+	// 	alert("four");
+	// },true)
+
+
+	//任何发生在 w3c事件模型 中的事件，首是进入捕获阶段，直到达到目标元素，再进入冒泡阶段。
+   // one.addEventListener('click',function(){
+   // alert('one');
+   // },true);//one为捕获事件
+   // two.addEventListener('click',function(){
+   // alert('two');
+   // },false);//two为冒泡事件
+   // three.addEventListener('click',function(){
+   // alert('three');
+   //  },true);//three为捕获事件
+   // four.addEventListener('click',function(){
+   // alert('four');
+   // },false);//four为冒泡事件
+   //此时点击four元素，four元素为目标元素，one为根元素祖先，从one开始向下判断执行。
+
+//one为捕获事件，输出one；two为冒泡事件，忽略,
+//three为捕获事件，输出three
+// four为目标元素，开始向上冒泡执行，输出four；（从此处分为两部分理解较容易。
+
+// three为捕获已执行，忽略;
+
+// two为冒泡事件，输出two；
+
+// one为捕获已执行，忽略。
+
+// 最终执行结果为：one three four two    
+ 
+</script>
